@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx-pod
+ labels:
+  type: proxy
+  author: intelliqit
+spec:
+ containers:
+  - name: mynginx
+    image: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: nginx-service
+ labels:
+  author: intelliqit
+spec:
+ type: NodePort
+ ports:
+  - targetPort: 80
+    port: 80
+    nodePort: 30008
+ selector:
+  author: intelliqit
+  type: proxy
+...
+ 

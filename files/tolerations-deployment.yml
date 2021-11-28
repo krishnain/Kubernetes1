@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    author: intelliqit
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      author: intelliqit
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        author: intelliqit
+    spec:
+      containers:
+        - name: mynginx
+          image: nginx
+          ports:
+            - containerPort: 80
+      tolerations:
+        - key: slave2
+          value: intelliqit2
+          operator: Equal
+          effect: NoSchedule
+...
+      
